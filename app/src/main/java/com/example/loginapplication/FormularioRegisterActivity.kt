@@ -10,7 +10,7 @@ import android.widget.Toast
 
 class FormularioRegisterActivity : AppCompatActivity() {
 
-    lateinit var registroDBHelper : DataBaseHelper
+    private lateinit var registroDBHelper : DataBaseHelper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +19,8 @@ class FormularioRegisterActivity : AppCompatActivity() {
 
         val botonRegistro = findViewById<Button>(R.id.btn_aceptar)
         val botonCancelarRegistro = findViewById<Button>(R.id.btn_cancelar)
+
+        registroDBHelper = DataBaseHelper(this)
 
 
         botonRegistro.setOnClickListener(){
@@ -36,9 +38,26 @@ class FormularioRegisterActivity : AppCompatActivity() {
     private fun validarfornmulario (){
 
          if(validarEmailRegistro() && validarPasswordRegistro() && validarNombreApellido() && validarTelefono()){
-            Toast.makeText(this,"Formulario Valido",Toast.LENGTH_SHORT).show()
+
+             Toast.makeText(this,"Formulario Valido",Toast.LENGTH_SHORT).show()
+
+             val email = findViewById<EditText>(R.id.et_email_form)
+             val pass = findViewById<EditText>(R.id.et_passwor_form)
+             val name = findViewById<EditText>(R.id.et_name)
+             val lastname = findViewById<EditText>(R.id.et_lastname)
+             val tel = findViewById<EditText>(R.id.et_Number)
+
+             val traerEmail = email.text.toString()
+             val traerPass = pass.text.toString()
+             val traername = name.text.toString()
+             val traerlastname = lastname.text.toString()
+             val traertell = tel.text.toString()
+
+             registroDBHelper.AddUser(traername,traerlastname,traerEmail,traerPass,traertell)
+
+             Toast.makeText(this,"Usuario guardado",Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(this," el formulario No es valido",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"No es valido y datos no guardados",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -54,12 +73,12 @@ class FormularioRegisterActivity : AppCompatActivity() {
             Toast.makeText(this,"Ingresar Correo Electronico",Toast.LENGTH_SHORT).show()
             email.setError("Ingresar Correo Electronico")
             email.requestFocus()
-            false
+            return false
 
         }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(obteneremail).matches()){
             email.requestFocus()
             Toast.makeText(this,"Correo Electronico Invalido",Toast.LENGTH_SHORT).show()
-            false
+            return false
 
         }
        return true

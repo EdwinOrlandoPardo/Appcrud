@@ -28,7 +28,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         onCreate(db)
     }
 
-    fun AddUser(nombre : String , apellido : String , email : String, password : String, telefono : Int){
+    fun AddUser(nombre : String , apellido : String , email : String, password : String, telefono : String){
 
         val datos = ContentValues()
 
