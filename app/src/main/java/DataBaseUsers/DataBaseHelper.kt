@@ -2,6 +2,7 @@ package DataBaseUsers
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -44,10 +45,15 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
 
     }
 
+    fun getData() : Cursor?{
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM " + TABLE_USERS , null)
+    }
+
     companion object{
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 1
+        private val DATABASE_VERSION = 2
 
         // Tabla singUp
         private val TABLE_LOGIN = "singup"
