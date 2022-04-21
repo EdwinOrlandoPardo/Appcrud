@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
 
@@ -42,6 +43,8 @@ class HomeActivity : AppCompatActivity() {
                 txvtell.append(cursor.getString(4).toString() + "\n")
             }while (cursor.moveToNext())
 
+        }else {
+            Toast.makeText(this,"No se pudo consultar ERROR",Toast.LENGTH_SHORT).show()
         }
 
     }

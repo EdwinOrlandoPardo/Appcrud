@@ -28,7 +28,7 @@ class FormularioRegisterActivity : AppCompatActivity() {
         }
 
         botonCancelarRegistro.setOnClickListener(){
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this,LoginMainActivity::class.java))
         }
 
 

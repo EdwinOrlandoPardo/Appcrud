@@ -47,13 +47,18 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
 
     fun getData() : Cursor?{
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM " + TABLE_USERS , null)
+        return db.rawQuery("SELECT * FROM $TABLE_USERS", null)
+    }
+
+    fun LoguinData(email : String) : Cursor{
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT " + EMAIL_USERS + "," + PASS_USERS + " FROM " + TABLE_USERS + " WHERE " + EMAIL_USERS + " = " + email ,null)
     }
 
     companion object{
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 2
+        private val DATABASE_VERSION = 3
 
         // Tabla singUp
         private val TABLE_LOGIN = "singup"
