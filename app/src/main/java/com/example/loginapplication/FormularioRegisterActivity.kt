@@ -4,6 +4,7 @@ import DataBaseUsers.DataBaseHelper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -53,10 +54,15 @@ class FormularioRegisterActivity : AppCompatActivity() {
              val traerlastname = lastname.text.toString()
              val traertell = tel.text.toString()
 
+             Log.d("TraerEmail", "" + traerEmail)
+
              registroDBHelper.AddUser(traername,traerlastname,traerEmail,traerPass,traertell)
 
              Toast.makeText(this,"Usuario guardado",Toast.LENGTH_SHORT).show()
-        }else{
+             val intent = Intent(this,HomeActivity::class.java)
+             startActivity(intent)
+
+         }else{
             Toast.makeText(this,"No es valido y datos no guardados",Toast.LENGTH_SHORT).show()
         }
     }

@@ -14,11 +14,9 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
     override fun onCreate(db: SQLiteDatabase?) {
 
 
-        val usersTable = ("CREATE TABLE "+ TABLE_USERS + " ("+ ID_USERS + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                NAME_USERS + "TEXT, " + LASTNAME_USERS + "TEXT, " + EMAIL_USERS + "TEXT, "+
-                PASS_USERS + "TEXT, " + TELL_USERS + "TEXT" +")")
+        val usersTable = ("CREATE TABLE "+ TABLE_USERS + " ("+ ID_USERS + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ NAME_USERS + " TEXT," + LASTNAME_USERS + " TEXT," + EMAIL_USERS + " TEXT,"+
+                PASS_USERS + " TEXT," + TELL_USERS + " TEXT" +")")
 
-        //db!!.execSQL(singUpTable)
         db!!.execSQL(usersTable)
 
     }
@@ -29,14 +27,14 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         onCreate(db)
     }
 
-    fun AddUser(nombre : String , apellido : String , email : String, password : String, telefono : String){
+    fun AddUser(nombre : String, apellido : String, email : String, pass : String, telefono : String){
 
         val datos = ContentValues()
 
         datos.put(NAME_USERS, nombre)
         datos.put(LASTNAME_USERS, apellido)
         datos.put(EMAIL_USERS,email)
-        datos.put(PASS_USERS,password)
+        datos.put(PASS_USERS,pass)
         datos.put(TELL_USERS,telefono)
 
         val db = this.writableDatabase
@@ -50,21 +48,16 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         return db.rawQuery("SELECT * FROM $TABLE_USERS", null)
     }
 
-    fun LoguinData(email : String) : Cursor{
+    fun loguinData(email : String) : Cursor?{
         val db = this.readableDatabase
-        return db.rawQuery("SELECT " + EMAIL_USERS + "," + PASS_USERS + " FROM " + TABLE_USERS + " WHERE " + EMAIL_USERS + " = " + email ,null)
+        return db.rawQuery("SELECT $EMAIL_USERS,$PASS_USERS FROM $TABLE_USERS WHERE $EMAIL_USERS = $email",null)
     }
 
     companion object{
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 3
+        private val DATABASE_VERSION = 4
 
-        // Tabla singUp
-        private val TABLE_LOGIN = "singup"
-        private val ID_COL = "_id"
-        private val EMAIL_COL = "email"
-        private val PASS_COL = "password"
 
         // Tabla Users
         private val TABLE_USERS = "users"

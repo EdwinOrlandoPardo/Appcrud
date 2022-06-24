@@ -3,6 +3,7 @@ package com.example.loginapplication
 import DataBaseUsers.DataBaseHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -37,11 +38,12 @@ class HomeActivity : AppCompatActivity() {
 
         if(cursor?.moveToFirst()!!){
             do{
-                txvnombre.append(cursor.getString(1).toString())
-                txvapellido.append(cursor.getString(2).toString())
-                txvemail.append(cursor.getString(3).toString())
+                Log.i("NOMBRE","" + txvnombre.append(cursor.getString(0).toString()))
+                txvapellido.append(cursor.getString(1).toString())
+                txvemail.append(cursor.getString(2).toString())
                 txvtell.append(cursor.getString(4).toString() + "\n")
             }while (cursor.moveToNext())
+
 
         }else {
             Toast.makeText(this,"No se pudo consultar ERROR",Toast.LENGTH_SHORT).show()
