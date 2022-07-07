@@ -29,6 +29,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
 
     fun AddUser(nombre : String, apellido : String, email : String, pass : String, telefono : String){
 
+        val db = this.writableDatabase
         val datos = ContentValues()
 
         datos.put(NAME_USERS, nombre)
@@ -37,7 +38,6 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         datos.put(PASS_USERS,pass)
         datos.put(TELL_USERS,telefono)
 
-        val db = this.writableDatabase
         db.insert(TABLE_USERS,null,datos)
         db.close()
 
@@ -45,18 +45,42 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
 
     fun getData() : Cursor?{
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_USERS", null)
+
+        val columns = arrayOf(NAME_USERS, LASTNAME_USERS, EMAIL_USERS, TELL_USERS)
+
+        val cursor = db.query(TABLE_USERS,
+        columns,
+        null,
+        null,
+        null,
+        null,
+        null)
+
+        return cursor
     }
 
-    fun loguinData(email : String) : Cursor?{
+    fun loguinData(emailUsu : String) : Cursor?{
         val db = this.readableDatabase
-        return db.rawQuery("SELECT $EMAIL_USERS,$PASS_USERS FROM $TABLE_USERS WHERE $EMAIL_USERS = $email",null)
+
+        val columns = arrayOf(EMAIL_USERS, PASS_USERS,NAME_USERS, LASTNAME_USERS)
+        val selection = "$EMAIL_USERS = ? AND $PASS_USERS = ?"
+        val selectionArg = arrayOf(emailUsu)
+
+        val cursor = db.query(TABLE_USERS,
+            columns,
+            selection,
+            selectionArg,
+            null,
+            null,
+            null)
+
+        return cursor
     }
 
     companion object{
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 4
+        private val DATABASE_VERSION = 16
 
 
         // Tabla Users

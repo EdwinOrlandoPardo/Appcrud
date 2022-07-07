@@ -59,8 +59,8 @@ class FormularioRegisterActivity : AppCompatActivity() {
              registroDBHelper.AddUser(traername,traerlastname,traerEmail,traerPass,traertell)
 
              Toast.makeText(this,"Usuario guardado",Toast.LENGTH_SHORT).show()
-             val intent = Intent(this,HomeActivity::class.java)
-             startActivity(intent)
+
+             startActivity(Intent(this,HomeActivity::class.java))
 
          }else{
             Toast.makeText(this,"No es valido y datos no guardados",Toast.LENGTH_SHORT).show()

@@ -4,6 +4,7 @@ import DataBaseUsers.DataBaseHelper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -23,7 +24,7 @@ class LoginMainActivity : AppCompatActivity() {
         registroDBHelper = DataBaseHelper(this)
 
         botonLogin.setOnClickListener {
-            validarLogin()
+            inicioSesion()
         }
 
         botonSingUp.setOnClickListener {
@@ -33,16 +34,19 @@ class LoginMainActivity : AppCompatActivity() {
 
     }
 
-    private fun validarEmail () : Boolean{
+    private fun validarFormularioLogin () : Boolean{
 
         val email = findViewById<EditText>(R.id.et_Email)
+        val pass = findViewById<EditText>(R.id.et_Password)
         val obteneremail = email.text.toString()
+        val obtenerPass = pass.text.toString()
 
-        if(obteneremail.isEmpty() && obteneremail == null){
+        if(obteneremail.isEmpty() && obtenerPass.isEmpty()){
 
-            Toast.makeText(this,"Ingresar Correo Electronico",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Ingresar Correo y contraseña",Toast.LENGTH_SHORT).show()
             email.error = "Ingresar Correo Electronico"
             email.requestFocus()
+            pass.requestFocus()
             return false
 
         }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(obteneremail).matches()){
@@ -55,31 +59,49 @@ class LoginMainActivity : AppCompatActivity() {
     }
 
 
-     fun validarLogin() {
+    private fun inicioSesion() {
 
-         val correo = findViewById<EditText>(R.id.et_Email)
-         val contrasena = findViewById<EditText>(R.id.et_Password)
+         if(validarFormularioLogin()) {
 
-         val obtenerCorreo = correo.text.toString()
-         val obtenerContrasena = contrasena.text.toString()
+             val correo = findViewById<EditText>(R.id.et_Email)
+             val contrasena = findViewById<EditText>(R.id.et_Password)
 
-         val cursor = registroDBHelper.loguinData(obtenerCorreo)
+             val obtenerCorreo = correo.text.toString()
+             val obtenerContrasena = contrasena.text.toString()
 
-         if(validarEmail()) {
-             if (cursor?.moveToFirst() == true) {
+             val cursor = registroDBHelper.loguinData(obtenerCorreo)
 
-                 do {
-                     var  correoUsu = cursor.getString(0).toString()
-                     var  passUsu = cursor.getString(1).toString()
+             var correoUsu : String = ""
+             var passUsu : String = ""
+
+             if (cursor?.moveToFirst()!!) {
+
+                do{
+                     correoUsu = cursor.getString(0).toString()
+                     passUsu = cursor.getString(1).toString()
+
                  } while (cursor.moveToNext())
 
-                 Toast.makeText(this, "HAY DOTOS ", Toast.LENGTH_SHORT).show()
+                 if(correoUsu.equals(obtenerCorreo) && passUsu.equals(obtenerContrasena)){
 
-             } else {
-                 Toast.makeText(this, "NO HAY DOTOS ERROR SENTENCIA", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(this, "DOTOS CORRECTOS" + correoUsu , Toast.LENGTH_SHORT).show()
+
+                     val intent = Intent(this,HomeActivity::class.java)
+                     startActivity(intent)
+
+                     correo.text.clear()
+                     contrasena.text.clear()
+
+                 } else {
+                     Toast.makeText(this, "DATOS INCORRECTOS", Toast.LENGTH_SHORT).show()
+                 }
+
+             }else{
+                 Toast.makeText(this, " NO HAY DOTOS " , Toast.LENGTH_SHORT).show()
+                 Log.i("ERROR","No hay datos")
              }
-         }
 
+         }
     }
 
     private fun registroUsuario() {

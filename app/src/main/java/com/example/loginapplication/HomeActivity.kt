@@ -38,10 +38,10 @@ class HomeActivity : AppCompatActivity() {
 
         if(cursor?.moveToFirst()!!){
             do{
-                Log.i("NOMBRE","" + txvnombre.append(cursor.getString(0).toString()))
+                txvnombre.append(cursor.getString(0).toString())
                 txvapellido.append(cursor.getString(1).toString())
                 txvemail.append(cursor.getString(2).toString())
-                txvtell.append(cursor.getString(4).toString() + "\n")
+                txvtell.append(cursor.getString(3).toString() + "\n")
             }while (cursor.moveToNext())
 
 
