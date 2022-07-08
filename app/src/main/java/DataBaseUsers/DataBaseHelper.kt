@@ -63,8 +63,8 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         val db = this.readableDatabase
 
         val columns = arrayOf(EMAIL_USERS, PASS_USERS,NAME_USERS, LASTNAME_USERS)
-        val selection = "$EMAIL_USERS = ? AND $PASS_USERS = ?"
-        val selectionArg = arrayOf(emailUsu)
+        val selection = "$EMAIL_USERS = ?" //where clausula
+        val selectionArg = arrayOf(emailUsu) // valores del where
 
         val cursor = db.query(TABLE_USERS,
             columns,
@@ -80,7 +80,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
     companion object{
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 16
+        private val DATABASE_VERSION = 17
 
 
         // Tabla Users

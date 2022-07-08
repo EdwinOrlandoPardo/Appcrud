@@ -82,6 +82,8 @@ class LoginMainActivity : AppCompatActivity() {
 
                  } while (cursor.moveToNext())
 
+                 Log.i("CORREO = ", "" + correoUsu)
+
                  if(correoUsu.equals(obtenerCorreo) && passUsu.equals(obtenerContrasena)){
 
                      Toast.makeText(this, "DOTOS CORRECTOS" + correoUsu , Toast.LENGTH_SHORT).show()
