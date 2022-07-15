@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.loginapplication.Objects.Usuario
 
 class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -47,6 +48,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         val db = this.readableDatabase
 
         val columns = arrayOf(NAME_USERS, LASTNAME_USERS, EMAIL_USERS, TELL_USERS)
+
 
         val cursor = db.query(TABLE_USERS,
         columns,

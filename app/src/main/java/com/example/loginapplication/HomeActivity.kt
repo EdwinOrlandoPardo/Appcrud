@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.loginapplication.Objects.Usuario
+import com.example.loginapplication.adapter.UsuarioAdapter
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,31 +23,33 @@ class HomeActivity : AppCompatActivity() {
 
         accesoDataBaseHelper = DataBaseHelper(this)
 
-        val btnConsultar = findViewById<Button>(R.id.btn_home_consultar)
-
-        btnConsultar.setOnClickListener {
-            ConsultarDatosUsuario()
-        }
-
-
+         ConsultarDatosUsuario()
     }
 
     private fun ConsultarDatosUsuario() {
 
         val cursor = accesoDataBaseHelper.getData()
 
-        val txvnombre = findViewById<TextView>(R.id.txv_home_name)
-        val txvapellido = findViewById<TextView>(R.id.txv_home_apellido)
-        val txvemail = findViewById<TextView>(R.id.txv_home_email)
-        val txvtell= findViewById<TextView>(R.id.txv_home_tell)
+        val recyclreview = findViewById<RecyclerView>(R.id.rv_usuarios)
+        val usuariolista = ArrayList<Usuario>()
 
         if(cursor?.moveToFirst()!!){
             do{
-                txvnombre.append(cursor.getString(0).toString())
-                txvapellido.append(cursor.getString(1).toString())
-                txvemail.append(cursor.getString(2).toString())
-                txvtell.append(cursor.getString(3).toString() + "\n")
+
+                val nombre = (cursor.getString(0).toString())
+                val apellido = (cursor.getString(1).toString())
+                val email = (cursor.getString(2).toString())
+                val telefono = (cursor.getString(3).toString())
+
+                val user = Usuario(nombre,apellido,email,telefono)
+
+                usuariolista.add(user)
+
             }while (cursor.moveToNext())
+
+
+            recyclreview.layoutManager = LinearLayoutManager(this)
+            recyclreview.adapter = UsuarioAdapter(usuariolista)
 
 
         }else {
