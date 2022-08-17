@@ -14,10 +14,14 @@ class UsuarioViewHolder(view: View): RecyclerView.ViewHolder(view){
     val telefono = view.findViewById<TextView>(R.id.usu_telefono)
 
 
-    fun render(usuario: Usuario){
+    fun render(usuario: Usuario, onclickListener:(Usuario) -> Unit){
         nombre.text = usuario.userNombre
         apellido.text = usuario.userApellido
         email.text = usuario.userEmail
         telefono.text = usuario.userTelefono
+
+        itemView.setOnClickListener{onclickListener(usuario)}
     }
+
+
 }
