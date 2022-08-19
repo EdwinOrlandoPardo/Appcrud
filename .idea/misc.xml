@@ -4,12 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/drawable/box_login.xml" value="0.2015" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/drawable/login_edit_background.xml" value="0.199" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/drawable/loginbacground.xml" value="0.1" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/layout/activity_formulario_register.xml" value="0.18" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/pardo/AndroidStudioProjects/LoginApplication/app/src/main/res/layout/item_usuarios.xml" value="0.1" />
       </map>
     </option>

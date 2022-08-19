@@ -29,27 +29,28 @@ class HomeActivity : AppCompatActivity() {
 
         val recyclreDatosUSuario = findViewById<RecyclerView>(R.id.rv_usuarios)
         val usuariolista = ArrayList<Usuario>()
+        val manager = LinearLayoutManager(this)
 
         if (cursor?.moveToFirst()!!) {
             do {
 
-                val nombre = (cursor.getString(0).toString())
-                val apellido = (cursor.getString(1).toString())
-                val email = (cursor.getString(2).toString())
-                val telefono = (cursor.getString(3).toString())
+                val id = (cursor.getInt(0))
+                val nombre = (cursor.getString(1).toString())
+                val apellido = (cursor.getString(2).toString())
+                val email = (cursor.getString(3).toString())
+                val telefono = (cursor.getString(4).toString())
 
-                val user = Usuario(nombre, apellido, email, telefono)
+                val user = Usuario(id,nombre, apellido, email, telefono)
 
                 usuariolista.add(user)
 
             } while (cursor.moveToNext())
 
-            val manager = LinearLayoutManager(this)
-            val decoration = DividerItemDecoration(this, manager.orientation)
+
             recyclreDatosUSuario.layoutManager = manager
-            recyclreDatosUSuario.adapter =
-                UsuarioAdapter(usuariolista) { usuario -> onItemSelected(usuario) } // funcion landa
-            recyclreDatosUSuario.addItemDecoration(decoration)
+
+            recyclreDatosUSuario.adapter = UsuarioAdapter(usuariolista) {
+                    usuario -> onItemSelected(usuario) } // funcion landa
 
 
         } else {
@@ -60,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     fun onItemSelected(usuario: Usuario) {
-        Toast.makeText(this, usuario.userNombre, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, usuario.id.toString() + usuario.userNombre, Toast.LENGTH_SHORT).show()
     }
 
 

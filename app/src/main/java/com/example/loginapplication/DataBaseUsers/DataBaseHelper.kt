@@ -48,7 +48,7 @@ class DataBaseHelper(context: Context?) :
     fun getData(): Cursor? {
         val db = this.readableDatabase
 
-        val columns = arrayOf(NAME_USERS, LASTNAME_USERS, EMAIL_USERS, TELL_USERS)
+        val columns = arrayOf(ID_USERS,NAME_USERS, LASTNAME_USERS, EMAIL_USERS, TELL_USERS)
 
 
         val cursor = db.query(
@@ -115,7 +115,7 @@ class DataBaseHelper(context: Context?) :
     companion object {
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 17
+        private val DATABASE_VERSION = 18
 
 
         // Tabla Users
