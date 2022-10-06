@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.loginapplication.Objects.Usuario
 import com.example.loginapplication.R
 
-class UsuarioViewHolder(view: View): RecyclerView.ViewHolder(view){
+class UsuarioViewHolder(view: View): RecyclerView.ViewHolder(view)  {
 
     val nombre = view.findViewById<TextView>(R.id.usu_nombre)
     val apellido = view.findViewById<TextView>(R.id.usu_apellido)
@@ -14,13 +14,18 @@ class UsuarioViewHolder(view: View): RecyclerView.ViewHolder(view){
     val telefono = view.findViewById<TextView>(R.id.usu_telefono)
 
 
+
+
     fun render(usuario: Usuario, onclickListener:(Usuario) -> Unit){
+
         nombre.text = usuario.userNombre
         apellido.text = usuario.userApellido
         email.text = usuario.userEmail
         telefono.text = usuario.userTelefono
 
         itemView.setOnClickListener{onclickListener(usuario)}
+
+
     }
 
 

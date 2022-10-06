@@ -64,6 +64,26 @@ class DataBaseHelper(context: Context?) :
         return cursor
     }
 
+    fun getDataPorId(id: Int) : Cursor{
+
+        val db = this.readableDatabase
+
+        val columns = arrayOf(ID_USERS,NAME_USERS, LASTNAME_USERS, EMAIL_USERS, TELL_USERS)
+        val selection = "$ID_USERS = ?" //where clausula
+        val selectionArg =  arrayOf(id.toString()) // valores del where
+
+        val cursor = db.query(
+            TABLE_USERS,
+            columns,
+            selection,
+            selectionArg,
+            null,
+            null,
+            null
+        )
+        return cursor
+    }
+
     fun deleteUser(id: Int) {
 
         val db = this.writableDatabase
@@ -115,7 +135,7 @@ class DataBaseHelper(context: Context?) :
     companion object {
 
         private val DATABASE_NAME = "db_registroUser"
-        private val DATABASE_VERSION = 18
+        private val DATABASE_VERSION = 19
 
 
         // Tabla Users

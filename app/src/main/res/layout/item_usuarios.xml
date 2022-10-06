@@ -12,11 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <TextView
             android:id="@+id/txv_usunombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre"
+            android:textColor="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -41,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="apellido"
+            android:textColor="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -65,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
+            android:textColor="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -88,13 +92,14 @@
             android:id="@+id/txv_usutelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tell"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txv_usuemail"
-            app:layout_constraintVertical_bias="0.01" />
+            app:layout_constraintVertical_bias="0.01"
+            android:text="Tell"
+            android:textColor="@color/teal_700"/>
 
         <TextView
             android:id="@+id/usu_telefono"
@@ -107,6 +112,9 @@
             app:layout_constraintTop_toBottomOf="@+id/usu_email"
             app:layout_constraintVertical_bias="0.01"
             tools:text="tell" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

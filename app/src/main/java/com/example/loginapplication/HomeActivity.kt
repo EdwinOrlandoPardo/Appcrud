@@ -1,5 +1,6 @@
 package com.example.loginapplication
 
+import android.content.Intent
 import com.example.loginapplication.DataBaseUsers.DataBaseHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -61,7 +62,9 @@ class HomeActivity : AppCompatActivity() {
 
 
     fun onItemSelected(usuario: Usuario) {
+
         Toast.makeText(this, usuario.id.toString() + usuario.userNombre, Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this,DetalleUsuarioActivity::class.java).putExtra("id", usuario.id))
     }
 
 

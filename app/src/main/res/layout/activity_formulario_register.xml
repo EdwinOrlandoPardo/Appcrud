@@ -13,6 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/box_login"
+        android:elevation="4dp"
         android:orientation="vertical">
 
 
@@ -23,9 +27,10 @@
             android:fontFamily="sans-serif-medium"
             android:text=" Registro Usuario"
             android:textAlignment="center"
-            android:textSize="34sp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            tools:textColor="#448AFF" />
+            tools:textColor="#151515"
+            android:layout_marginTop="40dp"/>
 
             <EditText
                 android:id="@+id/et_name"
@@ -91,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#536DFE"
             android:text="Aceptar"
@@ -103,10 +108,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#536DFE"
-            android:text="Cancelar" />
+            android:text="Cancelar"
+            android:layout_marginBottom="40dp"/>
 
 
     </LinearLayout>
