@@ -3,11 +3,16 @@ package com.example.loginapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.*
+import androidx.fragment.app.DialogFragment
 import com.example.loginapplication.DataBaseUsers.DataBaseHelper
+import com.example.loginapplication.DialogAlert.confimationAlertDialog
 import com.example.loginapplication.Objects.Usuario
 
-class DetalleUsuarioActivity : AppCompatActivity() {
+class DetalleUsuarioActivity : AppCompatActivity(), confimationAlertDialog.listenerAlertdialog {
 
     private lateinit var accesoDataBaseHelper : DataBaseHelper
 
@@ -18,26 +23,15 @@ class DetalleUsuarioActivity : AppCompatActivity() {
 
         accesoDataBaseHelper = DataBaseHelper(this)
 
-         ID_USUARIO  = intent.getIntExtra("id",0)
-       // ID_USUARIO = idExtra?.getInt("id")!!
+        ID_USUARIO  = intent.getIntExtra("id",0)
 
-        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+
         val btnOption = findViewById<ImageButton>(R.id.btn_opciones)
         val imgPerfil = findViewById<ImageView>(R.id.img_profile)
-
-        btnBack.setOnClickListener{
-            startActivity(Intent(this,HomeActivity::class.java))
-        }
-
-        btnOption.setOnClickListener{
-            OptionMenuDetalleUsuario()
-        }
 
 
 
         DetalleUsuarioPorId()
-
-
 
     }
 
@@ -65,7 +59,6 @@ class DetalleUsuarioActivity : AppCompatActivity() {
 
 
         var nombreView = findViewById<TextView>(R.id.txv_user_name)
-        //var apellidoView = findViewById<TextView>(R.id.usu_apellido)
         var emailView = findViewById<TextView>(R.id.txt_detalle_email)
         var telefonoView = findViewById<TextView>(R.id.txt_detalle_telefono)
 
@@ -92,38 +85,71 @@ class DetalleUsuarioActivity : AppCompatActivity() {
     }
 
 
-    private fun OptionMenuDetalleUsuario(){
 
-        val option : Int = 0
+     fun elimiarUsuario(){
 
-        when (option){
-
-            1 -> {
-                UpdateUsuario()
-            }
-
-            2 -> {
-                elimiarUsuario()
-            }
-        }
-
-    }
-
-    private fun elimiarUsuario(){
         if (ID_USUARIO != null){
 
-            //mensaje de confirmacion seguridad
-            // = a si eliminar
-            // = a no descartar mensaje
-            accesoDataBaseHelper.deleteUser(ID_USUARIO)
+            if(accesoDataBaseHelper.deleteUser(ID_USUARIO) == 0){
+                Toast.makeText(this@DetalleUsuarioActivity,
+                    "no se pudo eliminar el usuraio" ,Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this@DetalleUsuarioActivity,
+                    "usuraio eliminado" ,Toast.LENGTH_SHORT).show()
+            }
+
         }else {
-
+            Toast.makeText(this@DetalleUsuarioActivity,
+                "Usuraio No existe" ,Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     private fun  UpdateUsuario(){
 
+    }
+
+    fun showMenu(v: View) {
+        PopupMenu(this, v).apply {
+            setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                    item: MenuItem? ->
+
+                when (item?.itemId){
+                    R.id.itm_modificar ->{
+                        //UpdateUsuario()
+                        Toast.makeText(this@DetalleUsuarioActivity,
+                            "Actualizar Usuario", Toast.LENGTH_SHORT).show()
+
+                        true
+                    }
+                    R.id.itm_eliminar -> {
+
+                        Toast.makeText(this@DetalleUsuarioActivity,
+                            "Eliminar usuraio",Toast.LENGTH_SHORT).show()
+
+                        showDialogDetalleUsuario()
+
+                        true
+                    }
+                }
+                false
+
+            })
+            inflate(R.menu.menuoptions)
+            show()
+        }
+    }
+
+
+    fun showDialogDetalleUsuario(){
+        val dialog = confimationAlertDialog()
+        dialog.show(supportFragmentManager,"eliminar")
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment) {
+        elimiarUsuario()
+    }
+
+    override fun ondialogNegativeclick(dialog: DialogFragment) {
+        dialog.dismiss()
     }
 }

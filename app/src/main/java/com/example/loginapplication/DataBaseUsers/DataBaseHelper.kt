@@ -84,13 +84,14 @@ class DataBaseHelper(context: Context?) :
         return cursor
     }
 
-    fun deleteUser(id: Int) {
+    fun deleteUser(id: Int): Int{
 
         val db = this.writableDatabase
         val selection = "$ID_USERS = ?"
 
-        db.delete(TABLE_USERS, selection, arrayOf(id.toString()))
+        val cantEliminados = db.delete(TABLE_USERS, selection, arrayOf(id.toString()))
         db.close()
+        return cantEliminados
     }
 
     fun updateUser(id: Int, nombre: String, apellido: String, email: String, pass: String, telefono: String) {
